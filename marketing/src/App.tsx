@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import {Global} from './custom';
-import './App.css';
 
 function App() {
   return (
