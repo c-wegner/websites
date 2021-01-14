@@ -4,6 +4,11 @@ import {screen} from '../';
 
 import Image from '../img/logo/wegner-signature-logo.jpg';
 
+interface IBurgerLine{
+  display?: string;
+  rotationProps?: string;
+}
+
 class Styles{
   static Container = styled.header `
     display: flex;
@@ -50,10 +55,12 @@ class Styles{
     }
   `;
 
-  static BurgerLine = styled.div `
+  static BurgerLine = styled.div<IBurgerLine> `
     width: 100%;
     display: block;
     border: 1px solid #222;
+    display: ${p=>p.display};
+    ${p=>p.rotationProps};
   `;
 }
 
