@@ -6,7 +6,11 @@ import Image from '../img/logo/wegner-signature-logo.jpg';
 
 interface IBurgerLine{
   display?: string;
-  rotationProps?: string;
+  rotation?: string;
+}
+
+interface IStylesMenu{
+  height: string;
 }
 
 class Styles{
@@ -47,7 +51,6 @@ class Styles{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    aligin-items: center;
     background-color: inherit;
 
     @media(min-width: ${screen.md}){
@@ -59,8 +62,29 @@ class Styles{
     width: 100%;
     display: block;
     border: 1px solid #222;
-    display: ${p=>p.display};
-    ${p=>p.rotationProps};
+  `;
+
+  static Menu = styled.nav<IStylesMenu> `
+    height: ${p=>p.height};
+    overflow: hidden;
+    transition: height .5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    @media(min-width: ${screen.md}){
+      height: inherit;
+      justify-content: center;
+    }
+  `;
+
+  static OptContainer = styled.li `
+    display: flex;
+    flex-direction: column;
+
+    @media(min-width: ${screen.md}){
+      flex-direction: row;
+    }
   `;
 }
 
@@ -72,6 +96,11 @@ export const Header=()=>{
         <Styles.Logo src={Image} alt='Wegner Law PLLC Business Law Firm Signature Logo'/>
           <Hamburger expanded={expanded} onClick={()=>setExpanded(!expanded)}/>
       </Styles.LeftSide>
+      <Styles.Menu height={expanded? '100vh': '0'}>
+        <Styles.OptContainer>
+          hello
+        </Styles.OptContainer>
+      </Styles.Menu>
     </Styles.Container>
   )
 }
@@ -80,7 +109,7 @@ const Hamburger = ({expanded=false, onClick=()=>{}})=>{
 
   return(
     <Styles.Burger onClick={()=>onClick()}>
-    <Styles.BurgerLine />
+    <Styles.BurgerLine/>
     <Styles.BurgerLine />
     <Styles.BurgerLine />
   </Styles.Burger>
