@@ -20,6 +20,7 @@ const Styles = createGlobalStyle<IStyles> `
     padding: 0;
     margin: 0;
     overflow-x: hidden;
+    min-height: 100vh;
   }
 
   *{

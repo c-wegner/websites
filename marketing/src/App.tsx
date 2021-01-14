@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 //import logo from './logo.svg';
-import {Global} from './custom';
+import {Global, NavProvider} from './custom';
 
 function App() {
   return (
     <Fragment>
       <Global />
+      <NavProvider/>
       Helloeeeeeeee
     </Fragment>
   );
