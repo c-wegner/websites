@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { screen } from '../';
-import {Waypoint, NavUpdate} from './nav.context';
+import { Waypoint, NavUpdate } from './nav.context';
 
 import Image from '../img/logo/wegner-signature-logo.jpg';
 
@@ -74,10 +74,12 @@ class Styles {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    background-color: rgba(1,1,1,.75);
 
     @media(min-width: ${screen.md}){
       height: inherit;
       justify-content: center;
+      background: inherit;
     }
   `;
 
@@ -85,19 +87,35 @@ class Styles {
     display: flex;
     flex-direction: column;
     list-style: none;
+    padding: 5%;
 
     @media(min-width: ${screen.md}){
       flex-direction: row;
+      padding: 10px;
     }
   `;
   static Option = styled.li<IOptionStyle> `
-    
+    font-size: 1.5rem;
+    padding: 10px 0;
+    color: white;
+    cursor: pointer;
+
+    @media(min-width: ${screen.md}){
+      font-size: 1.1rem;
+      margin: 0 7px;
+      color: ${p => p.color};
+    }
   `;
 
 }
 
-export const Header: React.FC<{navContext: any}> = ({children, navContext}) => {
+export const Header: React.FC<{ navContext: any }> = ({ children, navContext }) => {
   const [expanded, setExpanded] = useState(false);
+
+  const handleNavigation = (section: Waypoint) => {
+    setExpanded(false);
+    navContext.navigate(section)
+  }
   return (
     <Styles.Container>
       <Styles.LeftSide>
@@ -106,11 +124,11 @@ export const Header: React.FC<{navContext: any}> = ({children, navContext}) => {
       </Styles.LeftSide>
       <Styles.Menu height={expanded ? '100vh' : '0'}>
         <Styles.OptContainer>
-        {
-          navContext.sections.map(x =>(
-            <Option section={x} onClick={()=>navContext.navigate(x)} key={x.id} current={navContext.current}/>
-          ))
-        }
+          {
+            navContext.sections.map(x => (
+              <Option section={x} onClick={() => handleNavigation(x)} key={x.id} current={navContext.current} />
+            ))
+          }
         </Styles.OptContainer>
       </Styles.Menu>
     </Styles.Container>
@@ -135,7 +153,7 @@ interface IOptionStyle {
 
 
 const Option = ({ section, current, onClick }) => (
-  <Styles.Option color={current.id===section.id? 'red': '#222'} borderColor='' onClick={()=>onClick()}>
+  <Styles.Option color={current.id === section.id ? 'red' : '#222'} borderColor='' onClick={() => onClick()}>
     {section.label}
   </Styles.Option>
 )

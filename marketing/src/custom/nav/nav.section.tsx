@@ -9,6 +9,7 @@ interface IContainer{
 const Container = styled.div<IContainer> `
   display: flex;
   flex-direction: column;
+  min-height: 55vh;
 `;
 
 interface ISection{

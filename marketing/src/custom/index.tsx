@@ -1,5 +1,5 @@
-import {Global, screen} from './global/styles';
+import {Global, screen, scrollTo} from './global/styles';
 import {NavProvider} from './nav/nav.context';
 import {Section} from './nav/nav.section';
 
-export {Global, screen, NavProvider, Section}
+export {Global, screen, NavProvider, Section, scrollTo}

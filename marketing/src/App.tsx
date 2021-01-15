@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 //import logo from './logo.svg';
-import {Global, NavProvider, Section} from './custom';
+import { Global, NavProvider, Section } from './custom';
 
 function App() {
   return (
@@ -8,17 +8,16 @@ function App() {
       <Global />
       <NavProvider>
         <Section id='About Us'>
-
+          QA
         </Section>
 
         <Section id='Practices'>
-
-</Section>
-<Section id='Industries'>
-
-</Section>
+          EE
+        </Section>
+        <Section id='Industries'>
+          1r1r
+        </Section>
       </NavProvider>
-      Helloeeeeeeee
     </Fragment>
   );
 }

@@ -48,7 +48,7 @@ export const Global = ({
   <Fragment>
     <title>{title}</title>
     <meta name='description' content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <Styles fontSize={fontSize + 'px'} />
   </Fragment>
 )
@@ -60,7 +60,45 @@ export const screen = {
   xl: '1200px',
 
   getStringFromSize: function (sz: string): number {
-      let temp = sz.substring(0, sz.length - 2);
-      return parseInt(temp);
+    let temp = sz.substring(0, sz.length - 2);
+    return parseInt(temp);
+  }
+}
+
+export const scrollTo = (target: number, speed = 40) => {
+  let currentPosition = window.pageYOffset;
+
+  let steps = 0;
+  let thisStep: number;
+  let thisTimer: any;
+
+  const goal = target - 75;
+
+
+  if (currentPosition < goal) {
+
+    thisTimer = setInterval(
+      () => {
+        steps += 1;
+        thisStep = (steps * speed) + currentPosition;
+        window.scrollTo(0, thisStep)
+        if (thisStep > goal) {
+          clearInterval(thisTimer)
+          return;
+        }
+      }, 1
+    )
+  } else {
+    thisTimer = setInterval(
+      ()=>{
+        steps +=1;
+        thisStep = currentPosition - (steps* speed)
+        window.scrollTo(0, thisStep)
+        if(thisStep<goal){
+          clearInterval(thisTimer)
+          return
+        }
+      }, 1
+    )
   }
 }

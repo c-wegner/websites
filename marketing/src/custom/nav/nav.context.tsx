@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Header } from './'
+import {scrollTo} from '../'
 
 
 export class Waypoint {
@@ -37,18 +38,22 @@ export const NavProvider: React.FC<{ children: any }> = ({ children }) => {
   const update = {
     sections: sections.current,
     register: (sec: Waypoint) => {
+      if(!checkForSection(sections.current, sec))
       sections.current.push(sec)
       setCurrent(sections.current[0])
     },
-    navigate: sec => setCurrent(sec)
+    navigate: sec =>{
+      scrollTo(sec.ref.offsetTop)
+      setCurrent(sec);
+    },
+    current: current,
   }
   return (
     <NavContext.Provider value={update}>
+      <Styles.Stage>
       <Header navContext={update}/>
-
-      {children}
-      <div style={{ height: '33vh' }} />
-
+        {children}
+      </Styles.Stage>
     </NavContext.Provider>
   )
 }
@@ -60,16 +65,11 @@ interface IOptionStyle {
 }
 
 class Styles {
-  static Option = styled.li<IOptionStyle> `
-
+  static Stage = styled.div `
+    display: flex;
+    flex-direction: column;
   `;
 }
-
-const Option: React.FC<{ section: Waypoint }> = ({ section }) => (
-  <Styles.Option color='' borderColor=''>
-    {section.label}
-  </Styles.Option>
-)
 
 function checkForSection(sections, id) {
   const l = sections.length;
