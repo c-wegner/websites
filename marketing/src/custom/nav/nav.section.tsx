@@ -1,7 +1,9 @@
-import React, { useContext, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useContext, useRef, useEffect, createContext } from 'react';
 import styled from 'styled-components';
 import { NavContext, Waypoint, NavUpdate } from './nav.context';
 import { useObserver } from '../'
+
+export const SectionContext = createContext(null)
 
 interface IContainer {
   ref: any;
@@ -39,9 +41,11 @@ export const Section: React.FC<ISection> = ({ children, id }) => {
   }
 
   return (
+    <SectionContext.Provider value={onScreen}>
     <Container ref={ref}>
       {children}
       {onScreen}
     </Container>
+    </SectionContext.Provider>
   )
 }
