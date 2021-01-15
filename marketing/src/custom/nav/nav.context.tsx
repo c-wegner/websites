@@ -53,7 +53,7 @@ export const NavProvider: React.FC<{ children: any }> = ({ children }) => {
       scrollTo(sec.ref.offsetTop)
       setCurrent(sec);
     },
-    spy: sec=>setCurrent(sec),
+    spy: sec=>handleSpy(sec),
     
     current: current,
   }
