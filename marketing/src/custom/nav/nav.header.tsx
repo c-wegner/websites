@@ -1,20 +1,27 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {screen} from '../';
+import { screen } from '../';
+import {Waypoint} from './nav.context';
 
 import Image from '../img/logo/wegner-signature-logo.jpg';
 
-interface IBurgerLine{
+interface IBurgerLine {
   display?: string;
   rotation?: string;
 }
 
-interface IStylesMenu{
+interface IStylesMenu {
   height: string;
 }
 
-class Styles{
-  static Container = styled.header `
+
+interface IOptionStyle{
+  color: string;
+  borderColor: string;
+}
+
+class Styles {
+  static Container = styled.header`
     display: flex;
     flex-direction: column-reverse;
     position: fixed;
@@ -30,19 +37,19 @@ class Styles{
     }
   `;
 
-  static LeftSide = styled.div `
+  static LeftSide = styled.div`
     flex-grow: 1;
     display: flex;
     justify-content: space-between;
   `;
 
-  static Logo = styled.img `
+  static Logo = styled.img`
     height: 45px;
     margin: 10px;
     cursor: pointer;
   `;
 
-  static Burger = styled.button `
+  static Burger = styled.button`
     margin: 10px;
     padding: 5px;
     cursor: pointer;
@@ -65,7 +72,7 @@ class Styles{
   `;
 
   static Menu = styled.nav<IStylesMenu> `
-    height: ${p=>p.height};
+    height: ${p => p.height};
     overflow: hidden;
     transition: height .5s;
     display: flex;
@@ -78,7 +85,7 @@ class Styles{
     }
   `;
 
-  static OptContainer = styled.li `
+  static OptContainer = styled.ul`
     display: flex;
     flex-direction: column;
 
@@ -86,17 +93,21 @@ class Styles{
       flex-direction: row;
     }
   `;
+
+  static Option = styled.li<IOptionStyle> `
+
+  `;
 }
 
-export const Header=()=>{
+export const Header: React.FC<{navContext: any}> = ({navContext}) => {
   const [expanded, setExpanded] = useState(false);
-  return(
+  return (
     <Styles.Container>
       <Styles.LeftSide>
-        <Styles.Logo src={Image} alt='Wegner Law PLLC Business Law Firm Signature Logo'/>
-          <Hamburger expanded={expanded} onClick={()=>setExpanded(!expanded)}/>
+        <Styles.Logo src={Image} alt='Wegner Law PLLC Business Law Firm Signature Logo' />
+        <Hamburger expanded={expanded} onClick={() => setExpanded(!expanded)} />
       </Styles.LeftSide>
-      <Styles.Menu height={expanded? '100vh': '0'}>
+      <Styles.Menu height={expanded ? '100vh' : '0'}>
         <Styles.OptContainer>
           hello
         </Styles.OptContainer>
@@ -105,13 +116,19 @@ export const Header=()=>{
   )
 }
 
-const Hamburger = ({expanded=false, onClick=()=>{}})=>{
+const Hamburger = ({ expanded = false, onClick = () => { } }) => {
 
-  return(
-    <Styles.Burger onClick={()=>onClick()}>
-    <Styles.BurgerLine/>
-    <Styles.BurgerLine />
-    <Styles.BurgerLine />
-  </Styles.Burger>
+  return (
+    <Styles.Burger onClick={() => onClick()}>
+      <Styles.BurgerLine />
+      <Styles.BurgerLine />
+      <Styles.BurgerLine />
+    </Styles.Burger>
   )
 }
+
+const Option:React.FC<{section: Waypoint}> =({section})=>(
+  <Styles.Option color='' borderColor=''>
+    {section.label}
+  </Styles.Option>
+)
