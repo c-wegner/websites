@@ -25,7 +25,6 @@ export class NavUpdate {
   sections: any;
   register: any;
   navigate: any;
-  spy: any;
   current: any;
 
   constructor(){this.sections=[new Waypoint()]}
@@ -35,7 +34,7 @@ export const NavContext = createContext(new NavUpdate());
 
 export const NavProvider: React.FC<{ children: any }> = ({ children }) => {
   const [current, setCurrent] = useState(new Waypoint())
-  const sections = useRef([new Waypoint()])
+  const sections = useRef([])
 
   const handleSpy =(section)=>{
     if(section.id === current.id) return
@@ -45,15 +44,15 @@ export const NavProvider: React.FC<{ children: any }> = ({ children }) => {
   const update = {
     sections: sections.current,
     register: (sec: Waypoint) => {
-      if(!checkForSection(sections.current, sec))
+      if(!checkForSection(sections.current, sec)){
       sections.current.push(sec)
+      }
       setCurrent(sections.current[0])
     },
     navigate: sec =>{
       scrollTo(sec.ref.offsetTop)
       setCurrent(sec);
     },
-    spy: sec=>handleSpy(sec),
     
     current: current,
   }

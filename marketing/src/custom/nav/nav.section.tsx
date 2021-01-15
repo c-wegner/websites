@@ -24,15 +24,20 @@ export const Section: React.FC<ISection> = ({ children, id }) => {
 
   let onScreen = useObserver(ref)
 
-  let section;
+  let section = new Waypoint();
 
 
-  useLayoutEffect(() => {
+  useEffect(() => {
 
     section = new Waypoint(id, id, 'SCROLL')
     section.ref = ref
     navContext.register(section)
-  }, [])
+  }, [id])
+
+  if(onScreen>.5){
+    section.id = id
+    console.log(section)
+  }
 
   return (
     <Container ref={ref}>
