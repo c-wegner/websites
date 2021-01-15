@@ -5,14 +5,16 @@ export const NavContext = createContext({});
 
 export const NavProvider =()=>{
     const [current, setCurrent] = useState(new Waypoint())
+    const sections = useRef([new Waypoint()])
 
     const update={
-
+      sections: sections.current,
+      register: (sec:Waypoint)=> sections.current.push(sec)
     }
     return(
       <NavContext.Provider value={update}>
         <Header navContext={update}>
-          
+
         </Header>
       </NavContext.Provider>
     )
