@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { screen } from '../';
-import {Waypoint} from './nav.context';
+import {Waypoint, NavUpdate} from './nav.context';
 
 import Image from '../img/logo/wegner-signature-logo.jpg';
 
@@ -15,10 +15,6 @@ interface IStylesMenu {
 }
 
 
-interface IOptionStyle{
-  color: string;
-  borderColor: string;
-}
 
 class Styles {
   static Container = styled.header`
@@ -94,12 +90,10 @@ class Styles {
     }
   `;
 
-  static Option = styled.li<IOptionStyle> `
 
-  `;
 }
 
-export const Header: React.FC<{navContext: any}> = ({navContext}) => {
+export const Header: React.FC<{navContext: any}> = ({children, navContext}) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <Styles.Container>
@@ -109,7 +103,7 @@ export const Header: React.FC<{navContext: any}> = ({navContext}) => {
       </Styles.LeftSide>
       <Styles.Menu height={expanded ? '100vh' : '0'}>
         <Styles.OptContainer>
-          hello
+          {children}
         </Styles.OptContainer>
       </Styles.Menu>
     </Styles.Container>
@@ -127,8 +121,3 @@ const Hamburger = ({ expanded = false, onClick = () => { } }) => {
   )
 }
 
-const Option:React.FC<{section: Waypoint}> =({section})=>(
-  <Styles.Option color='' borderColor=''>
-    {section.label}
-  </Styles.Option>
-)

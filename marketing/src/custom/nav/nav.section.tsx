@@ -1,6 +1,6 @@
 import React, {useContext, useRef, useEffect} from 'react';
 import styled from 'styled-components';
-import {NavContext, Waypoint} from './nav.context';
+import {NavContext, Waypoint, NavUpdate} from './nav.context';
 
 interface IContainer{
   ref:any;
@@ -17,18 +17,21 @@ interface ISection{
 }
 
 export const Section:React.FC<ISection> = ({children, id})=>{
-  const navContext = useContext(NavContext);
+  const navContext:NavUpdate = useContext(NavContext);
   let ref = useRef()
-
+  
   useEffect(()=>{
-    const section = new Waypoint(id, id)
-    section.ref= ref;
+    const section = new Waypoint(id, id, 'SCROLL')
+    section.ref = ref
     navContext.register(section)
-  }, [])
+  },[])
+
+
+
 
   return(
     <Container ref={ref}>
-
+      {children}
     </Container>
   )
 }
