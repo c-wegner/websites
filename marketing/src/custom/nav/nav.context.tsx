@@ -2,9 +2,30 @@ import React, { createContext, useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Header } from './'
 
+
+export class Waypoint {
+  _ref: any;
+
+  constructor(
+    public id = '',
+    public label = '',
+    public method = 'SCROLL'
+  ) { }
+
+  set ref(value: any) {
+    this._ref = value
+  }
+
+  get ref() {
+    return this._ref.current
+  }
+}
 export class NavUpdate {
   sections: any;
   register: any;
+  navigate: any;
+
+  constructor(){this.sections=[new Waypoint()]}
 }
 
 export const NavContext = createContext(new NavUpdate());
@@ -18,15 +39,12 @@ export const NavProvider: React.FC<{ children: any }> = ({ children }) => {
     register: (sec: Waypoint) => {
       sections.current.push(sec)
       setCurrent(sections.current[0])
-    }
+    },
+    navigate: sec => setCurrent(sec)
   }
   return (
     <NavContext.Provider value={update}>
-      <Header navContext={update}>
-        {
-          sections.current.map(x => x.id)
-        }
-      </Header>
+      <Header navContext={update}/>
 
       {children}
       <div style={{ height: '33vh' }} />
@@ -59,22 +77,4 @@ function checkForSection(sections, id) {
     if (sections[i].id === id) { return true }
   }
   return false
-}
-
-export class Waypoint {
-  _ref: any;
-
-  constructor(
-    public id = '',
-    public label = '',
-    public method = 'SCROLL'
-  ) { }
-
-  set ref(value: any) {
-    this._ref = value
-  }
-
-  get ref() {
-    return this._ref.current
-  }
 }

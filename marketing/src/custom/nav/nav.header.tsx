@@ -84,12 +84,15 @@ class Styles {
   static OptContainer = styled.ul`
     display: flex;
     flex-direction: column;
+    list-style: none;
 
     @media(min-width: ${screen.md}){
       flex-direction: row;
     }
   `;
-
+  static Option = styled.li<IOptionStyle> `
+    
+  `;
 
 }
 
@@ -103,7 +106,11 @@ export const Header: React.FC<{navContext: any}> = ({children, navContext}) => {
       </Styles.LeftSide>
       <Styles.Menu height={expanded ? '100vh' : '0'}>
         <Styles.OptContainer>
-          {children}
+        {
+          navContext.sections.map(x =>(
+            <Option section={x} onClick={()=>navContext.navigate(x)} key={x.id} current={navContext.current}/>
+          ))
+        }
         </Styles.OptContainer>
       </Styles.Menu>
     </Styles.Container>
@@ -121,3 +128,14 @@ const Hamburger = ({ expanded = false, onClick = () => { } }) => {
   )
 }
 
+interface IOptionStyle {
+  color: string;
+  borderColor: string;
+}
+
+
+const Option = ({ section, current, onClick }) => (
+  <Styles.Option color={current.id===section.id? 'red': '#222'} borderColor='' onClick={()=>onClick()}>
+    {section.label}
+  </Styles.Option>
+)

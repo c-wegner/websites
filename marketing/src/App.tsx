@@ -8,8 +8,15 @@ function App() {
       <Global />
       <NavProvider>
         <Section id='About Us'>
-          sssssssss
+
         </Section>
+
+        <Section id='Practices'>
+
+</Section>
+<Section id='Industries'>
+
+</Section>
       </NavProvider>
       Helloeeeeeeee
     </Fragment>
