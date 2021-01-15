@@ -3,6 +3,8 @@ import React, { Fragment } from 'react';
 import { Global, NavProvider, Section } from './custom';
 import {Hero} from './components';
 
+import {AnimationContainer} from './custom/animation/animation.container'
+
 function App() {
   return (
     <Fragment>
@@ -14,7 +16,7 @@ function App() {
         </Section>
 
         <Section id='Practices'>
-          EE
+         <AnimationContainer />
         </Section>
         <Section id='Industries'>
           1r1r
