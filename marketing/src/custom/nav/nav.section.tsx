@@ -1,9 +1,10 @@
-import React, {useContext, useRef, useEffect} from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import {NavContext, Waypoint, NavUpdate} from './nav.context';
+import { NavContext, Waypoint, NavUpdate } from './nav.context';
+import { useObserver } from '../'
 
-interface IContainer{
-  ref:any;
+interface IContainer {
+  ref: any;
 }
 
 const Container = styled.div<IContainer> `
@@ -12,25 +13,35 @@ const Container = styled.div<IContainer> `
   min-height: 55vh;
 `;
 
-interface ISection{
+interface ISection {
   children: any;
   id: string;
 }
 
-export const Section:React.FC<ISection> = ({children, id})=>{
-  const navContext:NavUpdate = useContext(NavContext);
+export const Section: React.FC<ISection> = ({ children, id }) => {
+  const navContext: NavUpdate = useContext(NavContext);
   let ref = useRef()
-  
-  useEffect(()=>{
-    const section = new Waypoint(id, id, 'SCROLL')
+
+  let onScreen = useObserver(ref)
+
+  let section;
+
+
+  useEffect(() => {
+
+    section = new Waypoint(id, id, 'SCROLL')
     section.ref = ref
     navContext.register(section)
-  },[])
+  }, [])
+
+  if (onScreen > 0 && id !== navContext.current) {
+    section = new Waypoint(id, id, 'SCROLL')
+    section.ref=ref;
+    console.log(section.id)
+  }
 
 
-
-
-  return(
+  return (
     <Container ref={ref}>
       {children}
     </Container>

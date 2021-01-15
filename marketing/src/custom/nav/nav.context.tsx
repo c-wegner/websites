@@ -25,6 +25,8 @@ export class NavUpdate {
   sections: any;
   register: any;
   navigate: any;
+  spy: any;
+  current: any;
 
   constructor(){this.sections=[new Waypoint()]}
 }
@@ -34,6 +36,11 @@ export const NavContext = createContext(new NavUpdate());
 export const NavProvider: React.FC<{ children: any }> = ({ children }) => {
   const [current, setCurrent] = useState(new Waypoint())
   const sections = useRef([new Waypoint()])
+
+  const handleSpy =(section)=>{
+    if(section.id === current.id) return
+    setCurrent(section)
+  }
 
   const update = {
     sections: sections.current,
@@ -46,6 +53,8 @@ export const NavProvider: React.FC<{ children: any }> = ({ children }) => {
       scrollTo(sec.ref.offsetTop)
       setCurrent(sec);
     },
+    spy: sec=>setCurrent(sec),
+    
     current: current,
   }
   return (
@@ -58,11 +67,6 @@ export const NavProvider: React.FC<{ children: any }> = ({ children }) => {
   )
 }
 
-
-interface IOptionStyle {
-  color: string;
-  borderColor: string;
-}
 
 class Styles {
   static Stage = styled.div `
