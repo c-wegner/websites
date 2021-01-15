@@ -13,6 +13,7 @@ const buildThresholdList=(steps=1)=>{
 export function useObserver(ref, steps=100, rootMargin = '-10px') {
   // State and setter for storing whether element is visible
   const [ratio, setRatio] = useState(0);
+  const [visible, setVisible] = useState(false)
 
   const options = {
     root: null,
@@ -25,6 +26,11 @@ export function useObserver(ref, steps=100, rootMargin = '-10px') {
       ([entry]) => {
         // Update our state when observer callback fires
         setRatio(entry.intersectionRatio);
+        if(entry.isIntersecting){
+          setVisible(true)
+        }else{
+          setVisible(false)
+        }
       },
       options
 
@@ -37,5 +43,5 @@ export function useObserver(ref, steps=100, rootMargin = '-10px') {
     };
   }, []); // Empty array ensures that effect is only run on mount and unmount
 
-  return ratio;
+  return [ratio, visible];
 }

@@ -25,6 +25,7 @@ export class NavUpdate {
   sections: any;
   register: any;
   navigate: any;
+  spy: any;
   current: any;
 
   constructor(){this.sections=[new Waypoint()]}
@@ -53,6 +54,8 @@ export const NavProvider: React.FC<{ children: any }> = ({ children }) => {
       scrollTo(sec.ref.offsetTop)
       setCurrent(sec);
     },
+
+    spy: id=>setCurrent(getSectionById(sections.current, id)),
     
     current: current,
   }
@@ -72,6 +75,14 @@ class Styles {
     display: flex;
     flex-direction: column;
   `;
+}
+
+function getSectionById(sections: any[], id){
+  const l = sections.length;
+  for(let i=0; i<l; i++){
+    if(sections[i].id===id) return sections[i]
+  }
+  return new Waypoint();
 }
 
 function checkForSection(sections, id) {

@@ -22,7 +22,7 @@ export const Section: React.FC<ISection> = ({ children, id }) => {
   const navContext: NavUpdate = useContext(NavContext);
   let ref = useRef()
 
-  let onScreen = useObserver(ref)
+  const [onScreen, visible] = useObserver(ref)
 
   let section = new Waypoint();
 
@@ -34,9 +34,8 @@ export const Section: React.FC<ISection> = ({ children, id }) => {
     navContext.register(section)
   }, [id])
 
-  if(onScreen>.5){
-    section.id = id
-    console.log(section)
+  if(visible){
+    navContext.spy(id)
   }
 
   return (
