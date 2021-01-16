@@ -25,6 +25,7 @@ class Styles {
     background-color: white;
     border-top: 1px solid #222;
     width: 100%;
+    z-index: 5;
 
     @media(min-width: ${screen.md}){
       flex-direction: row;

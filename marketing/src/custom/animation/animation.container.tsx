@@ -1,6 +1,9 @@
 import React, {useState, useEffect, useContext, Fragment} from 'react';
 import styled from 'styled-components';
 import {SectionContext, screen} from '../'
+import {Settings} from './animation.settings';
+
+export{Settings}
 
 interface IContainer{
   marginRight: string;
@@ -12,7 +15,7 @@ interface IContainer{
 }
 
 const Container = styled.div<IContainer> `
-  blur: 8px;
+  filter: blur(${p=>p.blur});
   opacity: ${p=>p.opacity};
   margin-top: ${p=>p.marginTop};
   @media(min-width: ${screen.md}){
@@ -20,6 +23,23 @@ const Container = styled.div<IContainer> `
     margin-right: ${p=>p.marginRight};  
   }
 `;
+
+export const Animate =({settings = new Settings, children})=>{
+  settings.ratio = useContext(SectionContext);
+console.log(settings.getMarginLeft())
+  return(
+    <Container
+    marginRight={settings.getMarginRight()+ 'px'}
+    marginLeft={settings.getMarginLeft()+'px'}
+    blur = {settings.getBlur()+ 'px'}
+    opacity = {settings.getOpacity().toString()}
+    marginTop={settings.marginTop+'px'}
+    marginBottom={settings.marginBottom+'px'}
+  >
+    {children}
+  </Container>
+  )
+}
 
 export const AnimateLeftToRight=({
   start=0,

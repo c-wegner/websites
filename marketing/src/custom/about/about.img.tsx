@@ -2,6 +2,12 @@ import React, {useContext} from 'react'
 import styled from 'styled-components'
 import Image from '../img/attorney/hero-small.jpg';
 import {AnimateLeftToRight} from '../'
+import {Animate, Settings} from '../animation/animation.container'
+
+const AnimationSetting = Settings.leftToRight()
+
+AnimationSetting.marginLeft=500;
+AnimationSetting.move = 250;
 
 const Picture = styled.img `
     width: 100%;
@@ -9,17 +15,12 @@ const Picture = styled.img `
 `
 
 export const Img = ()=>(
-    <AnimateLeftToRight
-    start={250}
-    move={375}
-    fadeFrom={0}
-    fadeTo={1}
-    marginTop='10vh'
-    marginBottom='10vh'
+    <Animate
+    settings={AnimationSetting}
    >
      <Picture
         src={Image}
         alt="Naples business attorney P. Christopher Wegner"
      />
-   </AnimateLeftToRight>
+   </Animate>
 )

@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 //import logo from './logo.svg';
-import { Global, NavProvider, Section, AnimateLeftToRight, Bio } from './custom';
+import { Global, NavProvider, Section, AnimateLeftToRight, Bio, Animater } from './custom';
 import {Hero} from './components';
+
 
 
 function App() {
