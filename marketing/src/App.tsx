@@ -10,7 +10,7 @@ function App() {
     <Fragment>
       <Global />
       <NavProvider>
-        <Hero />
+        <Hero/>
         <Section id='About Us'>
           QA
         </Section>

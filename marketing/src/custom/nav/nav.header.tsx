@@ -119,7 +119,7 @@ export const Header: React.FC<{ navContext: any }> = ({ children, navContext }) 
   return (
     <Styles.Container>
       <Styles.LeftSide>
-        <Styles.Logo src={Image} alt='Wegner Law PLLC Business Law Firm Signature Logo' />
+        <Styles.Logo onClick={()=>handleNavigation(navContext.sections[0])} src={Image} alt='Wegner Law PLLC Business Law Firm Signature Logo' />
         <Hamburger expanded={expanded} onClick={() => setExpanded(!expanded)} />
       </Styles.LeftSide>
       <Styles.Menu height={expanded ? '100vh' : '0'}>

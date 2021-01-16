@@ -37,10 +37,7 @@ export const NavProvider: React.FC<{ children: any }> = ({ children }) => {
   const [current, setCurrent] = useState(new Waypoint())
   const sections = useRef([])
 
-  const handleSpy =(section)=>{
-    if(section.id === current.id) return
-    setCurrent(section)
-  }
+  
 
   const update = {
     sections: sections.current,
@@ -51,8 +48,17 @@ export const NavProvider: React.FC<{ children: any }> = ({ children }) => {
       setCurrent(sections.current[0])
     },
     navigate: sec =>{
-      scrollTo(sec.ref.offsetTop)
-      setCurrent(sec);
+      if(sec===undefined){
+        scrollTo(0)
+
+      }else if(sec.id ===''){
+        scrollTo(0)
+
+
+      }else{
+        scrollTo(sec.ref.offsetTop)
+        setCurrent(sec);
+      }
     },
 
     spy: id=>setCurrent(getSectionById(sections.current, id)),
