@@ -59,5 +59,6 @@ export class Settings {
 
   get blur(){
     const rawBlur = this.options.start.blur - (this.options.effectiveBlurChange * this.effectiveRatio)
+    return rawBlur + 'px'
   }
 }
