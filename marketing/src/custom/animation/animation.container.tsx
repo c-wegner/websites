@@ -1,28 +1,36 @@
 import React, {useState, useEffect, useContext, Fragment} from 'react';
 import styled from 'styled-components';
-import {SectionContext} from '../'
+import {SectionContext, screen} from '../'
+import {Options, Settings} from './animate.options';
+export {Options, Settings}
 
 interface IContainer{
   margin: string;
+  opacity: number;
+  blur: string;
 }
 
 const Container = styled.div<IContainer> `
-  margin-left: ${p=>p.margin};
+  margin: 0;
+  filter: blur(${p=>p.blur});
+  opacity: ${p=>p.opacity};
+
+  @media(min-width: ${screen.md}){
+    margin: ${p=>p.margin};
+  }
 `;
 
-export const AnimationContainer=()=>{
+export const AnimationContainer=({children, options})=>{
   const onScreen = useContext(SectionContext)
+  const settings = new Settings(options);
 
-  const getPosition=(delta)=>{
-    let appliedRatio = 1 -onScreen
-    let position = delta * appliedRatio
-    return position + 'px'
-  }
+
+  settings.ratio=onScreen
 
   return(
     <Fragment>
-      <Container margin={getPosition(400)}>
-        This i
+      <Container margin={settings.margins} opacity={settings.opacity} blur={settings.blur}>
+        {children}
       </Container>
     </Fragment>
   )

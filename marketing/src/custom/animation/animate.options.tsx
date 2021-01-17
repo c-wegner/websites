@@ -30,7 +30,7 @@ export class Options {
   }
 
   get effectiveBlurChange(){
-    return this.start.opacity - this.finish.blur
+    return this.start.blur - this.finish.blur
   }
 }
 
@@ -39,9 +39,13 @@ export class Settings {
   direction = 'down';
   options = new Options()
 
+  constructor(opts: Options){
+    this.options = opts;
+  }
+
   get effectiveRatio() {
-    const rawAppliedRatio = this.options.buffer + this.ratio
-    return rawAppliedRatio < 1 ? rawAppliedRatio : 1
+    const rawAppliedRatio = (this.options.buffer/100) + this.ratio
+    return (rawAppliedRatio < 1) ? rawAppliedRatio : 1
   }
 
   get margins() {

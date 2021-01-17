@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import { Global, NavProvider, Section } from './custom';
 import {Hero} from './components';
 
-import {AnimationContainer} from './custom/animation/animation.container'
+import {TestContainer} from './custom/animation/test.animation'
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         </Section>
 
         <Section id='Practices'>
-         <AnimationContainer />
+         <TestContainer />
         </Section>
         <Section id='Industries'>
           1r1r
