@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext, Fragment} from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import styled from 'styled-components';
 import {SectionContext, screen} from '../'
 import {Settings} from './animation.settings';
@@ -12,6 +12,7 @@ interface IContainer{
   opacity: string;
   marginTop: string;
   marginBottom:string;
+  ref?: any;
 }
 
 const Container = styled.div<IContainer> `
@@ -25,8 +26,13 @@ const Container = styled.div<IContainer> `
 `;
 
 export const Animate =({settings = new Settings, children})=>{
+  const ref = useRef(null)
   settings.ratio = useContext(SectionContext);
-console.log(settings.getMarginLeft())
+  if(ref.current!==null){
+  settings.setRatio(ref.current.offsetTop, window.document.body.clientHeight)
+  console.log(settings.elementPosition)
+  }
+
   return(
     <Container
     marginRight={settings.getMarginRight()+ 'px'}
@@ -35,8 +41,10 @@ console.log(settings.getMarginLeft())
     opacity = {settings.getOpacity().toString()}
     marginTop={settings.marginTop+'px'}
     marginBottom={settings.marginBottom+'px'}
+    ref={ref}
   >
     {children}
+    {settings.elementPosition}
   </Container>
   )
 }

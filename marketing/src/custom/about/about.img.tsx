@@ -11,7 +11,7 @@ AnimationSetting.move = 250;
 
 const Picture = styled.img `
     width: 100%;
-    max-width: 450px;
+    max-width: 400px;
 `
 
 export const Img = ()=>(

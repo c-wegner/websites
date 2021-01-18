@@ -12,6 +12,7 @@ export class Settings{
     fade = 0;
     fadeTo = 1;
     repeat = false;
+    elementPosition =0;
 
     getMarginRight(){
         if(this._rightToLeft) return this.marginRight;
@@ -34,6 +35,11 @@ export class Settings{
         const delta = this.blurTo -this.blur;
         const val = this.blur + (delta * appliedRatio(this.ratio, this.safety))
         return val
+    }
+
+    setRatio(elePosition, pageSize){
+        this.elementPosition = elePosition
+        return pageSize/elePosition
     }
     
     static leftToRight(start=0, distance=0){
