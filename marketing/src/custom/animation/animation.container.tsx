@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext, Fragment} from 'react';
+import React, {useState, useEffect, useContext, Fragment,useRef} from 'react';
 import styled from 'styled-components';
 import {SectionContext, screen} from '../'
 import {Options, Settings} from './animate.options';
@@ -8,9 +8,11 @@ interface IContainer{
   margin: string;
   opacity: number;
   blur: string;
+  ref?: any;
 }
 
 const Container = styled.div<IContainer> `
+
   margin: 0;
   filter: blur(${p=>p.blur});
   opacity: ${p=>p.opacity};
@@ -21,15 +23,19 @@ const Container = styled.div<IContainer> `
 `;
 
 export const AnimationContainer=({children, options})=>{
+  const ref = useRef(null)
   const onScreen = useContext(SectionContext)
   const settings = new Settings(options);
+  if(ref.current){
+    console.log((ref.current.offsetTop -window.pageYOffset)/window.innerHeight)
+  }
 
 
   settings.ratio=onScreen
 
   return(
     <Fragment>
-      <Container margin={settings.margins} opacity={settings.opacity} blur={settings.blur}>
+      <Container margin={settings.margins} opacity={settings.opacity} blur={settings.blur} ref={ref}>
         {children}
       </Container>
     </Fragment>
