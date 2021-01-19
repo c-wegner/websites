@@ -1,3 +1,7 @@
+import React, {useContext, useRef} from 'react';
+import styled from 'styled-components';
+import {screen, SectionContext} from '../'
+
 export class AnimaterOptions{
   private _buffer = .2;
   private _peak = .7;
@@ -61,6 +65,10 @@ export class AnimaterControl{
     this._percentPageViewed = onScreen;
   }
 
+  set updatePosition(val){
+    this._percentPageViewed = val;
+  }
+
   get appliedRatio(){
     const screenPosition =  (this._elementYOffset-this._pageYOffset)/this._browserHeight
     const rawRatio = (screenPosition + this._options.buffer)>1? 1 : (screenPosition + this._options.buffer);
@@ -70,7 +78,43 @@ export class AnimaterControl{
 
   get margins():string{
     return `
-      ${this._options.start.margin.top + (this._options.move.down)}
+      ${this._options.start.margin.top + (this._options.move.down * this.appliedRatio)}px 
+      ${this._options.start.margin.right + (this._options.move.left * this.appliedRatio)}px 
+      ${this._options.start.margin.bottom + (this._options.move.up * this.appliedRatio)}px 
+      ${this._options.start.margin.left + (this._options.move.right * this.appliedRatio)}px
     `;
   }
+}
+
+interface IContainer{
+  attrs: AnimaterControl;
+  ref?:any;
+}
+
+const Container = styled.div<IContainer> `
+  margin: 0;
+
+  @media(min-width: ${screen.md}){
+    margin: ${p=>p.attrs.margins};
+  }
+`;
+
+export const Animater=({children, opts = new AnimaterOptions()})=>{
+  const ref = useRef(null)
+  const onScreen = useContext(SectionContext)
+
+  let animaterControl: AnimaterControl
+  if(ref.current){
+    animaterControl = new AnimaterControl(opts, window.innerHeight, ref.current.offsetTop);
+  }else{
+    animaterControl = new AnimaterControl(opts, window.innerHeight, 0);
+  }
+
+  animaterControl.updateAnimater(onScreen, window.pageYOffset)
+
+  return(
+    <Container ref={ref} attrs={animaterControl}>
+      {children}
+    </Container>
+  ) 
 }

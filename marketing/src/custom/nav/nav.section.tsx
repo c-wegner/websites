@@ -24,7 +24,7 @@ export const Section: React.FC<ISection> = ({ children, id }) => {
   const navContext: NavUpdate = useContext(NavContext);
   let ref = useRef()
 
-  const [onScreen, visible] = useObserver(ref)
+  const [onScreen, visible] = useObserver(ref, 1000)
 
   let section = new Waypoint();
 

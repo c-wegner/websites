@@ -10,7 +10,7 @@ const buildThresholdList=(steps=1)=>{
   return thresholds
 }
 
-export function useObserver(ref, steps=100, rootMargin = '-150px') {
+export function useObserver(ref, steps=200, rootMargin = '-150px') {
   // State and setter for storing whether element is visible
   const [ratio, setRatio] = useState(0);
   const [visible, setVisible] = useState(false)
