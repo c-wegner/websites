@@ -3,7 +3,6 @@ import React, { Fragment } from 'react';
 import { Global, NavProvider, Section } from './custom';
 import {Hero} from './components';
 
-import {TestContainer} from './custom/animation/test.animation'
 
 function App() {
   return (
@@ -12,14 +11,14 @@ function App() {
       <NavProvider>
         <Hero/>
         <Section id='About Us'>
-          QA
+
         </Section>
 
         <Section id='Practices'>
-         <TestContainer />
+
         </Section>
         <Section id='Industries'>
-          1r1r
+
         </Section>
       </NavProvider>
     </Fragment>
