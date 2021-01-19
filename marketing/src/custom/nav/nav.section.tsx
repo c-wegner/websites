@@ -28,9 +28,7 @@ export const Section: React.FC<ISection> = ({ children, id }) => {
 
   let section = new Waypoint();
 
-
   useEffect(() => {
-
     section = new Waypoint(id, id, 'SCROLL')
     section.ref = ref
     navContext.register(section)

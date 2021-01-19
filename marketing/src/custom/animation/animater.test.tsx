@@ -3,8 +3,8 @@ import Pic from '../img/logo/wegner-signature-logo.jpg';
 import { AnimaterOptions, Animater } from "./animater.class";
 
 const testOpts = new AnimaterOptions()
-testOpts.move.right= 500;
-testOpts.start.margin.left = 250;
+testOpts.move.right= 700;
+testOpts.start.margin.left = 100;
 
 export const TestBox = ()=>(
   <Animater opts={testOpts}>

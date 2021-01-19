@@ -72,6 +72,7 @@ export class AnimaterControl{
   get appliedRatio(){
     const screenPosition =  (this._elementYOffset-this._pageYOffset)/this._browserHeight
     const rawRatio = (screenPosition + this._options.buffer)>1? 1 : (screenPosition + this._options.buffer);
+    const appliedPeak = this._scrollingDown?this._options.peak : 1-this._options.peak
     const appliedRatio = 1 - Math.abs(rawRatio - this._options.peak)
     return appliedRatio
   }
