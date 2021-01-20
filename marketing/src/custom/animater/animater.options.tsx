@@ -83,6 +83,24 @@ export class Controls{
   get marginRight():string{
     return `${this._options.start.margin.right + (this._options.move.left * this.appliedRatio)}px` 
   }
+
+  get marginTop():string{
+    return `${this._options.start.margin.top + (this._options.move.down * this.appliedRatio)}px` 
+  }
+
+  get marginBottom():string{
+    return `${this._options.start.margin.bottom + (this._options.move.up * this.appliedRatio)}px` 
+  }
+
+  get opacity():number{
+    const delta = this._options.finish.opacity - this._options.start.opacity
+    return this._options.start.opacity + (delta* this.appliedRatio)
+  }
+
+  get blur():string{
+    const delta = this._options.start.blur- this._options.finish.blur
+    return `${this._options.start.blur - (delta * this.appliedRatio)}px`
+  }
 }
 
 function getAppliedRatio(ratio, buffer, target){
