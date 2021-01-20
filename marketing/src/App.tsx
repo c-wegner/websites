@@ -2,7 +2,8 @@ import React, { Fragment } from 'react';
 //import logo from './logo.svg';
 import { Global, NavProvider, Section } from './custom';
 import {Hero} from './components';
-import {TestBox} from './custom/animation/animater.test';
+import {Test} from './custom/animater/testing';
+
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
         </Section>
 
         <Section id='Practices'>
-          <TestBox />
+          <Test />
         </Section>
         <Section id='Industries'>
 

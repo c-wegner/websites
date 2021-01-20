@@ -55,6 +55,10 @@ export class Controls{
     this._options = options
   }
 
+  set onScreen(val){
+    this._onScreenRatio = val
+  }
+
   set ratio(val: number){
     if(val > this._onScreenRatio){
       this._scrollingDown = true;
@@ -70,6 +74,14 @@ export class Controls{
       this._revealed =true
     }
     return ratio
+  }
+
+  get marginLeft(): string{
+    return `${this._options.start.margin.left + (this._options.move.right * this.appliedRatio)}px`
+  }
+
+  get marginRight():string{
+    return `${this._options.start.margin.right + (this._options.move.left * this.appliedRatio)}px` 
   }
 }
 
