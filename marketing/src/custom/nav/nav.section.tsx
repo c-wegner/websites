@@ -42,7 +42,6 @@ export const Section: React.FC<ISection> = ({ children, id }) => {
     <SectionContext.Provider value={onScreen}>
     <Container ref={ref}>
       {children}
-      {onScreen}
     </Container>
     </SectionContext.Provider>
   )
