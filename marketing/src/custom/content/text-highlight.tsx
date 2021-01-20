@@ -16,10 +16,10 @@ class Styles{
   `
 }
 
-export const ContentBox = ({children, width=500})=>{
+export const ContentBox = ({children, width='500px'})=>{
   return(
     <Styles.Container width={width}>
-
+A
     </Styles.Container>
   )
 }
