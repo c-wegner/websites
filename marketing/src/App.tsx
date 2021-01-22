@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 //import logo from './logo.svg';
-import { Global, NavProvider, Section} from './custom';
-import {Hero} from './components';
+import { Global} from './custom';
+import {NavProvider, SectionProvider} from './_custom';
 
 
 
@@ -11,16 +11,9 @@ function App() {
     <Fragment>
       <Global />
       <NavProvider>
-        <Hero />
-        <Section id='About Us'  backgroundColor='lightblue'>
-   
-        </Section>
-
-        <Section id='Practices'>
-        </Section>
-        <Section id='Industries'>
-
-        </Section>
+        <SectionProvider id='Test Section'>
+          Tada
+        </SectionProvider>
       </NavProvider>
     </Fragment>
   );
