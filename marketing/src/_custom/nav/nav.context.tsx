@@ -67,6 +67,8 @@ export const Section =({children, id})=>{
   return(
     <Stage ref={ref} id={id}>
       {children}
+
+      {onScreen}
     </Stage>
   )
 }
