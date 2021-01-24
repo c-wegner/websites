@@ -6,7 +6,7 @@ export const Main =()=>{
   return(
 <Fragment>
   <NavProvider>
-    <div style={{height: '150vh'}}></div>
+    <div style={{height: '450vh'}}></div>
     <Section id={'Tuba'}>
 
     </Section>
