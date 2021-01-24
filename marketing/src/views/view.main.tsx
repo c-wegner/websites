@@ -1,21 +1,20 @@
-import React from 'react';
-import { NavProvider, Section, Stage } from "../_custom";
+import React, { Fragment } from 'react';
+import {NavProvider, Section} from '../_custom'
+
 
 export const Main =()=>{
   return(
-    <Stage>
-      <NavProvider>
-        <div style={{height: '175vh'}}>
+<Fragment>
+  <NavProvider>
+    <div style={{height: '150vh'}}></div>
+    <Section id={'Tuba'}>
 
-        </div>
-        <Section id='Testing' >
-          Hi
-        </Section>
+    </Section>
 
-        <Section id='Tuba'>
-          world bro.
-        </Section>
-      </NavProvider>
-    </Stage>
+    <Section id={'Khaki'}> 
+    
+    </Section>
+  </NavProvider>
+</Fragment>
   )
 }

@@ -1,16 +1,15 @@
 import {scrollTo} from './utilities/scroll-to';
 import {useObserver} from './utilities/observer';
 import {screen, Stage} from './utilities/constants';
-import {SectionClass} from './models/section';
-import {NavProvider, NavContext} from './nav/nav.context';
-import {Section} from './nav/nav.section'
+import * as Models from './models/nav.models';
+import {NavProvider, Section} from './nav/nav.context';
+
 export{
   scrollTo,
   useObserver,
   screen,
   Stage,
-  SectionClass,
-  NavContext,
+  Models,
   NavProvider,
   Section
 }

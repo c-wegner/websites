@@ -1,48 +1,72 @@
-import React, { useState, useRef, createContext, useEffect } from 'react';
-import { SectionClass, Stage, scrollTo } from '../';
+import React, {useState, useEffect, useContext, createContext, useRef} from 'react';
+import {scrollTo, Stage, useObserver, Models} from '../';
 
-export const NavContext = createContext(null)
+class INavContext{
+  sections: Models.Section[];
+  register: any;
+  navigate: any;
+  spy: any;
+  current: Models.Section;
 
-export const NavProvider = ({ children }) => {
-  const [currentSection, setCurrentSection] = useState(new SectionClass())
-  const sections = useRef([new SectionClass()])
+  constructor(){this.sections=[new Models.Section()]}
+}
 
-  const context = {
-    current: currentSection,
+export const NavContext = createContext(new INavContext);
+
+export const NavProvider:React.FC<{children: any}>=({children})=>{
+  const [currentSection, setCurrentSection] = useState(new Models.Section())
+  const sections = useRef([new Models.Section()])
+
+  const context:INavContext = {
     sections: sections.current,
-    register: section =>{
-      sections.current.push(section);
-      setCurrentSection(sections.current[0])
-    }
+    register: sec=>{
+      if(!Models.checkForSection(sections.current, sec.id)){
+        sections.current.push(sec)
+        setCurrentSection(sections.current[0])
+      }
+    },
+    navigate: sec=>{
+      if(sec.id===''){
+        scrollTo(0)
+        setCurrentSection(sections.current[0])
+      }else{
+        scrollTo(sec.ref.offsetTop);
+        setCurrentSection(sec)
+      }
+    },
+    spy: null,
+    current: currentSection
   }
 
-  const handleScroll=(sec)=>{
-    scrollTo(sec.ref.offsetTop)
-  }
+  console.table(sections.current)
 
-  return (
+  return(
     <NavContext.Provider value={context}>
       <Stage>
-        <span onClick={()=>handleScroll(sections.current[0])} >Hi</span>
+        <span onClick={()=>context.navigate(sections.current[1])}>Hu</span>
         {children}
       </Stage>
-    </NavContext.Provider>
+    </NavContext.Provider> 
   )
 }
 
-const getSectionById = (sections: SectionClass[], Id: string)=>{
-  const l = sections.length;
-  for(let i=0; i<l; i++){
-    const s = sections[i]
-    if(s.id===Id){return s}
-  }
-  return new SectionClass()
-}
+export const Section =({children, id})=>{
+  const navContext: INavContext = useContext(NavContext)
+  let ref= useRef()
+  const [onScreen, visible] = useObserver(ref, 1000);
 
-function register(section, sections, setter){
-  if(getSectionById(sections, section.id).id===null){
-    sections.push(section)
-    setter(sections)
-  }
-  console.table(sections)
+  let section = new Models.Section()
+
+  useEffect(()=>{
+    section.id =id;
+    section.title = id;
+    section.ref = ref
+    navContext.register(section)
+  },[id])
+
+  return(
+    <Stage ref={ref} id={id}>
+      {children}
+    </Stage>
+  )
 }
