@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useContext, createContext, useRef} from 'react';
 import {Header} from './nav.header';
+import {Section} from './nav.section'
 import {scrollTo, Stage, useObserver, Models} from '../';
 
-class INavContext{
+export class INavContext{
   sections: Models.Section[];
   register: any;
   navigate: any;
@@ -51,23 +52,3 @@ export const NavProvider:React.FC<{children: any}>=({children})=>{
   )
 }
 
-export const Section =({children, id})=>{
-  const navContext: INavContext = useContext(NavContext)
-  let ref= useRef()
-  const [onScreen, visible] = useObserver(ref, 1000);
-
-  let section = new Models.Section()
-
-  useEffect(()=>{
-    section.id =id;
-    section.title = id;
-    section.ref = ref
-    navContext.register(section)
-  },[id])
-
-  return(
-    <Stage ref={ref} id={id}>
-      {children}
-    </Stage>
-  )
-}
