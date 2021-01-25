@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 //import logo from './logo.svg';
-import { Global} from './custom';
+import { Global} from './_custom';
 import {Main} from './views/view.main';
 
 

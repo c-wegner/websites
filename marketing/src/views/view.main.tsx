@@ -8,13 +8,15 @@ export const Main =()=>{
   <NavProvider>
 
     <Section id={'Tuba'}>
-      <div style={{height: '1254vh'}}>
+      <div style={{height: '125vh'}}>
         Gere
       </div>
     </Section>
 
     <Section id={'Khaki'}> 
-
+    <div style={{height: '125vh'}}>
+        Gere
+      </div>
     </Section>
   </NavProvider>
 
