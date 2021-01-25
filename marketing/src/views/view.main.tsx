@@ -8,7 +8,9 @@ export const Main =()=>{
   <NavProvider>
 
     <Section id={'Tuba'}>
- 
+      <div style={{height: '1254vh'}}>
+        Gere
+      </div>
     </Section>
 
     <Section id={'Khaki'}> 

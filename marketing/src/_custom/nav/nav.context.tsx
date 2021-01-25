@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext, createContext, useRef} from 'react';
+import {Header} from './nav.header';
 import {scrollTo, Stage, useObserver, Models} from '../';
 
 class INavContext{
@@ -43,7 +44,7 @@ export const NavProvider:React.FC<{children: any}>=({children})=>{
   return(
     <NavContext.Provider value={context}>
       <Stage>
-        <span onClick={()=>context.navigate(sections.current[1])}>Hu</span>
+        <Header navContext={context}/>
         {children}
       </Stage>
     </NavContext.Provider> 
@@ -67,8 +68,6 @@ export const Section =({children, id})=>{
   return(
     <Stage ref={ref} id={id}>
       {children}
-
-      {onScreen}
     </Stage>
   )
 }
