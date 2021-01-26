@@ -2,7 +2,7 @@ import {scrollTo} from './utilities/scroll-to';
 import {useObserver} from './utilities/observer';
 import {screen, Stage} from './utilities/constants';
 import * as Models from './models/nav.models';
-import {NavProvider, Section} from './nav/nav.context';
+import {NavProvider, Section, SectionContext, CSectionContext} from './nav/nav.context';
 import {Global} from './global/styles';
 
 
@@ -14,5 +14,7 @@ export{
   Models,
   NavProvider,
   Section,
+  SectionContext,
+  CSectionContext,
   Global
 }

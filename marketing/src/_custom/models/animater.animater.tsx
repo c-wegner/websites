@@ -34,6 +34,10 @@ export class Options {
     }
   }
 
+  get peak(){
+    return this._peak
+  }
+
   set buffer(value) {
     if (value > 1) {
       this._buffer = value;
@@ -41,6 +45,7 @@ export class Options {
       this._buffer = value / 100;
     }
   }
+
 }
 
 export class Control {
@@ -51,9 +56,14 @@ export class Control {
   private _elementYOffset = 0;
 
   private _effectiveObservedRatio = 0;
+
+  constructor(options: Options){
+    this._options = options;
+  }
   
 
   update(viewableRato, pageYOffset) {
+
     this._viewableRatio = viewableRato;
     if (this._pageYOffset < pageYOffset) {
       this._scrollingDown = true;
@@ -62,6 +72,7 @@ export class Control {
     }
     this._pageYOffset = pageYOffset;
     this.setEffectiveRatio();
+
   }
 
   
@@ -70,6 +81,8 @@ export class Control {
     const start = this._options.start.margin
     const move = this._options.move
     const ratio = this._effectiveObservedRatio
+
+    return `${start.right + applyEffectiveRatio(ratio, move.left)}px`
 
     return `
       ${start.top + applyEffectiveRatio(ratio, move.down)}px 
@@ -80,10 +93,15 @@ export class Control {
   }
 
   private setEffectiveRatio(){
-    let rawRatio = Math.abs(this._viewableRatio - this._options.peak);
+    let rawRatio = Math.abs(this._viewableRatio - .7);
+
+
     rawRatio= 1 - rawRatio
-    rawRatio = rawRatio + this._options.buffer;
+
+    rawRatio = rawRatio + .2;
+
     this._effectiveObservedRatio = rawRatio >1? 1: rawRatio
+
   }
 }
 

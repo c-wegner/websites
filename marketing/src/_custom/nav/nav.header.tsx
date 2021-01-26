@@ -111,7 +111,6 @@ export const Header: React.FC<{ navContext: any }> = ({ children, navContext }) 
 
   const handleNavigation = (section) => {
     setExpanded(false);
-    console.log(section)
     navContext.navigate(section)
   }
   return (
