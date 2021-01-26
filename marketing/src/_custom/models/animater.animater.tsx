@@ -50,6 +50,9 @@ export class Control {
   private _pageYOffset = 0;
   private _elementYOffset = 0;
 
+  private _effectiveObservedRatio = 0;
+  
+
   update(viewableRato, pageYOffset) {
     this._viewableRatio = viewableRato;
     if (this._pageYOffset < pageYOffset) {
@@ -58,14 +61,32 @@ export class Control {
       this._scrollingDown = false;
     }
     this._pageYOffset = pageYOffset;
+    this.setEffectiveRatio();
   }
+
+  
 
   get margin(){
     const start = this._options.start.margin
     const move = this._options.move
-    
+    const ratio = this._effectiveObservedRatio
+
     return `
-    
+      ${start.top + applyEffectiveRatio(ratio, move.down)}px 
+      ${start.right + applyEffectiveRatio(ratio, move.left)}px
+      ${start.bottom+ applyEffectiveRatio(ratio, move.up)}px
+      ${start.left + applyEffectiveRatio(ratio, move.right)}px
     `
   }
+
+  private setEffectiveRatio(){
+    let rawRatio = Math.abs(this._viewableRatio - this._options.peak);
+    rawRatio= 1 - rawRatio
+    rawRatio = rawRatio + this._options.buffer;
+    this._effectiveObservedRatio = rawRatio >1? 1: rawRatio
+  }
+}
+
+function applyEffectiveRatio(ratio, tot){
+  return ratio * tot
 }
