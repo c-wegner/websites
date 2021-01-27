@@ -31,11 +31,10 @@ export const Animater = ({children, options = new Models.Options()})=>{
 
   return(
     <Container
-      opacity={1}
-      blur={'0px'}
+      opacity={control.opacity}
+      blur={control.blur}
       margins={control.margin}>
         {children}
-        {control.margin}
       </Container>
   )
 }

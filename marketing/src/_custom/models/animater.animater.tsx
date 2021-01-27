@@ -55,7 +55,7 @@ export class Control {
   private _pageYOffset = 0;
   private _elementYOffset = 0;
 
-  private _effectiveObservedRatio = 0;
+   _effectiveObservedRatio = 0;
 
   constructor(options: Options){
     this._options = options;
@@ -84,21 +84,25 @@ export class Control {
 
     return `${start.right + applyEffectiveRatio(ratio, move.left)}px`
 
-    return `
-      ${start.top + applyEffectiveRatio(ratio, move.down)}px 
-      ${start.right + applyEffectiveRatio(ratio, move.left)}px
-      ${start.bottom+ applyEffectiveRatio(ratio, move.up)}px
-      ${start.left + applyEffectiveRatio(ratio, move.right)}px
-    `
+  }
+
+  get opacity(){
+    return this._options.start.opacity+ applyEffectiveRatio(this._viewableRatio, this._options.end.opacity- this._options.start.opacity)
+  }
+
+  get blur(){
+    
+    return `${this._options.start.blur - applyEffectiveRatio(this._viewableRatio, this._options.start.blur)}px`
+
   }
 
   private setEffectiveRatio(){
-    let rawRatio = Math.abs(this._viewableRatio - .7);
+    let rawRatio = Math.abs(this._viewableRatio - .5);
 
 
     rawRatio= 1 - rawRatio
 
-    rawRatio = rawRatio + .2;
+    rawRatio = rawRatio + .3;
 
     this._effectiveObservedRatio = rawRatio >1? 1: rawRatio
 
@@ -106,5 +110,5 @@ export class Control {
 }
 
 function applyEffectiveRatio(ratio, tot){
-  return ratio * tot
+  return (ratio + .4) * tot
 }
