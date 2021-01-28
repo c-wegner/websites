@@ -3,7 +3,7 @@ import {useObserver} from './utilities/observer';
 import {screen, Stage} from './utilities/constants';
 import * as Models from './models/nav.models';
 import {NavProvider, Section, SectionContext, CSectionContext} from './nav/nav.context';
-import {Global} from './global/styles';
+import {Global, Wrapper} from './global/styles';
 
 
 export{
@@ -16,5 +16,6 @@ export{
   Section,
   SectionContext,
   CSectionContext,
-  Global
+  Global,
+  Wrapper
 }
