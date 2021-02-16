@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext, createContext, useRef} from 'rea
 import {Header} from './nav.header';
 import {Section} from './nav.section'
 import {scrollTo, Stage, useObserver, Models} from '../';
+import { Section as ModelSection } from '../models/nav.models';
 
 export class INavContext{
   sections: Models.Section[];
@@ -40,7 +41,6 @@ export const NavProvider:React.FC<{children: any}>=({children})=>{
     current: currentSection
   }
 
-  console.table(sections.current)
 
   return(
     <NavContext.Provider value={context}>
@@ -52,3 +52,48 @@ export const NavProvider:React.FC<{children: any}>=({children})=>{
   )
 }
 
+<<<<<<< HEAD
+=======
+export class CSectionContext{
+  section: any;
+  observedRatio: any;
+  constructor(sec = new ModelSection(), ratio=0){
+    this.observedRatio = ratio;
+    this.section = sec;
+  }
+}
+
+export const SectionContext = createContext(new CSectionContext())
+
+export const Section =({children, id})=>{
+  const navContext: INavContext = useContext(NavContext)
+  let ref= useRef()
+  const [onScreen, visible] = useObserver(ref, 1000);
+
+  let section = new Models.Section()
+
+  const context:CSectionContext = {
+    observedRatio: onScreen,
+    section: {
+      id: id,
+      title: id,
+      ref: ref,
+    }
+  }
+
+  useEffect(()=>{
+    section.id =id;
+    section.title = id;
+    section.ref = ref
+    navContext.register(section)
+  },[id])
+
+  return(
+    <SectionContext.Provider value={context}>
+    <Stage ref={ref} id={id}>
+      {children}
+    </Stage>
+    </SectionContext.Provider>
+  )
+}
+>>>>>>> 499cb657a4090b5629e9860df1c7be66c27f8891

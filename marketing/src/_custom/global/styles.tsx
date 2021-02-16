@@ -53,6 +53,11 @@ export const Global = ({
   </Fragment>
 )
 
+export const Wrapper= styled.div `
+  overflow-x: hidden;
+  position: relative;
+`;
+
 export const screen = {
   sm: '576px',
   md: '825px',

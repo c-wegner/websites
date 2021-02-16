@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const buildThresholdList=(steps=1)=>{
+const buildThresholdList=(steps)=>{
   let thresholds = []
   for(let i=1; i<=steps; i++){
     let ratio = i/steps;
@@ -10,7 +10,7 @@ const buildThresholdList=(steps=1)=>{
   return thresholds
 }
 
-export function useObserver(ref, steps=100, rootMargin = '-150px') {
+export function useObserver(ref, steps=1000, rootMargin = '-250px'): [number, boolean] {
   // State and setter for storing whether element is visible
   const [ratio, setRatio] = useState(0);
   const [visible, setVisible] = useState(false)
@@ -28,7 +28,7 @@ export function useObserver(ref, steps=100, rootMargin = '-150px') {
         setRatio(entry.intersectionRatio);
         
         if(entry.isIntersecting){
-          console.log(entry.intersectionRatio)
+  
           setVisible(true)
         }else{
           setVisible(false)

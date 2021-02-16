@@ -1,3 +1,6 @@
+import { Options, Control } from "./animater.animater";
+export {Options, Control}
+
 export class Section{
   private _ref: any;
   
