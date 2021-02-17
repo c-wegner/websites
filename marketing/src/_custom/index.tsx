@@ -14,8 +14,6 @@ export{
   Models,
   NavProvider,
   Section,
-  SectionContext,
-  CSectionContext,
-  Global,
-  Wrapper
+  SectionContext, CSectionContext,
+  Global
 }

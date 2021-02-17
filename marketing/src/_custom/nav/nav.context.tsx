@@ -1,9 +1,10 @@
 import React, {useState, useEffect, useContext, createContext, useRef} from 'react';
 import {Header} from './nav.header';
+
 import {scrollTo, Stage, useObserver, Models} from '../';
 import { Section as ModelSection } from '../models/nav.models';
 
-class INavContext{
+export class INavContext{
   sections: Models.Section[];
   register: any;
   navigate: any;
