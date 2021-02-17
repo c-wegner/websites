@@ -1,5 +1,5 @@
 export class Options {
-  private _peak = .7;
+  private _peak = .9;
   private _buffer = .2;
 
   start = {
